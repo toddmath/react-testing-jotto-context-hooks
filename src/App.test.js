@@ -1,9 +1,21 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { shallow } from "enzyme";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import { findByTestAttr } from "../test/testUtils";
+import App from "./App";
+
+/**
+ * Setup function for App component
+ * @return {ShallowWrapper}
+ */
+const setup = () => {
+  return shallow(<App />);
+};
+
+describe("App", () => {
+  test("App renders without error", () => {
+    const wrapper = setup();
+    const component = findByTestAttr(wrapper, "component-app");
+    expect(component.length).toBe(1);
+  });
 });
