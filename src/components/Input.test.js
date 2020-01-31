@@ -27,13 +27,12 @@ describe("Input", () => {
     let wrapper,
       inputBox,
       submitButton,
-      mockSetCurrentGuess,
-      mockEvent,
-      mockValue;
+      mockEvent;
+    const mockSetCurrentGuess = jest.fn();
+    const mockValue = "train";
 
     beforeEach(() => {
-      mockValue = "train";
-      mockSetCurrentGuess = jest.fn();
+      mockSetCurrentGuess.mockClear();
       React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
       mockEvent = { target: { value: mockValue } };
 
@@ -52,6 +51,7 @@ describe("Input", () => {
       submitButton.simulate("click");
 
       expect(mockSetCurrentGuess).toHaveBeenCalled();
+      expect(mockSetCurrentGuess).toHaveBeenCalledWith("")
     });
   });
 });
