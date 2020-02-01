@@ -17,7 +17,9 @@ const Input = ({ secretWord }) => {
     <div data-test="component-input">
       <Form inline>
         <FormGroup className="mb-2 mx-sm-3">
-          <Label for="guess">Next Guess:</Label>
+          <Label for="guess" className="mr-2">
+            Next Guess:
+          </Label>
           <In
             data-test="input-box"
             type="search"

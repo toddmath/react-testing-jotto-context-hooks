@@ -11,12 +11,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
-    "reactstrap": "^8.4.1"
+    "react-scripts": "3.3.1",
+    "reactstrap": "^8.4.1",
+    "@bit/bondz.react-epic-spinners.fulfilling-square-spinner": "file:./components/fulfilling-square-spinner"
   },
   "devDependencies": {
     "check-prop-types": "^1.1.2",
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "bit": {
+    "env": {},
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "yarn"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "@bit/bondz.react-epic-spinners.fulfilling-square-spinner",
+  "version": "0.3.0",
+  "homepage": "https://bit.dev/bondz/react-epic-spinners/fulfilling-square-spinner",
+  "main": "dist/FulfillingSquareSpinner.js",
+  "dependencies": {
+    "react": ">=0.14.x",
+    "prop-types": "^15.6.0",
+    "styled-components": "^2.4.0"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@0.0.14"
+    }
+  }
+}
