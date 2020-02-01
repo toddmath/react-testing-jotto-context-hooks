@@ -19,6 +19,7 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, {
     secretWord: null
   });
+
   const setSecretWord = secretWord =>
     dispatch({ type: "setSecretWord", payload: secretWord });
 

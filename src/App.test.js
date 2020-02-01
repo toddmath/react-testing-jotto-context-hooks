@@ -24,14 +24,14 @@ const setup = secretWord => {
   return mount(<App />);
 };
 
-const shallowSetup = () => {
-  return shallow(<App />);
-};
+// const shallowSetup = () => {
+//   return shallow(<App />);
+// };
 
 describe("App component", () => {
   // test("App renders without error", () => {
   //   // const wrapper = setup();
-  //   const wrapper = shallowSetup();
+  //   const wrapper = setup();
   //   wrapper.update();
   //   console.log(wrapper.debug());
   //   const component = findByTestAttr(wrapper, "component-app");
