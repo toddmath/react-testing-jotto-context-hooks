@@ -1,10 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Form, FormGroup, Label, Input as In } from 'reactstrap'
 
-import { Form, FormGroup, Label, Button, Input as In } from 'reactstrap'
+import languageContext from '../contexts/languageContext'
+import stringsModule from '../helpers/strings'
 
 const Input = ({ secretWord }) => {
+  const language = React.useContext(languageContext)
   const [currentGuess, setCurrentGuess] = React.useState('')
+
+  const inputPlaceHolder = stringsModule.getStringByLanguage(
+    language,
+    'guessInputPlaceholder'
+  )
+
+  const buttonText = stringsModule.getStringByLanguage(language, 'submit')
 
   // TODO: update `guessedWords` context
   // TODO: check against `secretWord` and optionally update `success` context
@@ -25,19 +35,20 @@ const Input = ({ secretWord }) => {
             type='search'
             name='guess'
             id='guess'
-            placeholder='five-letter guess'
+            placeholder={inputPlaceHolder}
             value={currentGuess}
             onChange={e => setCurrentGuess(e.target.value)}
           />
         </FormGroup>
-        <Button
+        <button
           data-test='submit-button'
           onClick={e => handleOnSubmit(e)}
-          className='mb-2'
+          className={`mb-2 btn btn-primary ${language === 'emoji' ? 'px-4' : ''}`}
+          type='button'
           color='primary'
         >
-          Submit
-        </Button>
+          {buttonText}
+        </button>
       </Form>
     </div>
   )

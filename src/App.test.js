@@ -18,11 +18,13 @@ const setup = secretWord => {
   mockGetSecretWord.mockClear()
   hookActions.getSecretWord = mockGetSecretWord
 
-  const mockUseReducer = jest.fn().mockReturnValue([{ secretWord }, jest.fn()])
+  const mockUseReducer = jest
+    .fn()
+    .mockReturnValue([{ secretWord, language: 'en' }, jest.fn()])
   React.useReducer = mockUseReducer
 
-  // ! using mount becuase useEffect not called with `shallow`
-  // ! https://github.com/airbnb/enzyme/issues/2086
+  // using mount becuase useEffect not called with `shallow`
+  // see https://github.com/airbnb/enzyme/issues/2086
   return mount(<App />)
 }
 
@@ -52,7 +54,7 @@ describe('App component', () => {
   //   console.log(wrapper.debug());
   //   mockGetSecretWord.mockClear();
 
-  //   // ! issue with update() see: https://github.com/airbnb/enzyme/issues/2254
+  //  // ! issue with update() see: https://github.com/airbnb/enzyme/issues/2254
   //   wrapper.setProps();
 
   //   expect(mockGetSecretWord).not.toHaveBeenCalled();

@@ -9,11 +9,12 @@
 </p>
 
 > Jotto web app for react testing udemy course.
+For more info on the game Jotto, see it's [wikipedia page](https://en.wikipedia.org/wiki/Jotto, "Jotto Wikipedia").
 
 ## Install
 
 ```sh
-yarn install
+yarn
 ```
 
 ## Usage
