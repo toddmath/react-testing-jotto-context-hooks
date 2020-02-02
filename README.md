@@ -9,7 +9,9 @@
 </p>
 
 > Jotto web app for react testing udemy course.
-For more info on the game Jotto, see it's [wikipedia page](https://en.wikipedia.org/wiki/Jotto, "Jotto Wikipedia").
+<p>
+For more info on the game Jotto, see it's <a href="https://en.wikipedia.org/wiki/Jotto" target="_blank" alt="Jotto Wikipedia">wikipedia page</a>
+</p>
 
 ## Install
 
