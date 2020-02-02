@@ -1,11 +1,13 @@
-import React from "react";
-import { mount, shallow } from "enzyme";
+/* eslint-disable jest/no-commented-out-tests */
+/* eslint-disable import/no-named-as-default-member */
+import React from 'react'
+import { mount } from 'enzyme'
 
-import { findByTestAttr } from "../test/testUtils";
-import hookActions from "./actions/hookActions";
-import App from "./App";
+import { findByTestAttr } from '../test/testUtils'
+import hookActions from './actions/hookActions'
+import App from './App'
 
-const mockGetSecretWord = jest.fn();
+const mockGetSecretWord = jest.fn()
 
 /**
  * Setup function for App component
@@ -13,22 +15,22 @@ const mockGetSecretWord = jest.fn();
  * @returns {ReactWrapper}
  */
 const setup = secretWord => {
-  mockGetSecretWord.mockClear();
-  hookActions.getSecretWord = mockGetSecretWord;
+  mockGetSecretWord.mockClear()
+  hookActions.getSecretWord = mockGetSecretWord
 
-  const mockUseReducer = jest.fn().mockReturnValue([{ secretWord }, jest.fn()]);
-  React.useReducer = mockUseReducer;
+  const mockUseReducer = jest.fn().mockReturnValue([{ secretWord }, jest.fn()])
+  React.useReducer = mockUseReducer
 
   // ! using mount becuase useEffect not called with `shallow`
   // ! https://github.com/airbnb/enzyme/issues/2086
-  return mount(<App />);
-};
+  return mount(<App />)
+}
 
 // const shallowSetup = () => {
 //   return shallow(<App />);
 // };
 
-describe("App component", () => {
+describe('App component', () => {
   // test("App renders without error", () => {
   //   // const wrapper = setup();
   //   const wrapper = setup();
@@ -38,12 +40,12 @@ describe("App component", () => {
   //   expect(component.length).toBeGreaterThan(0);
   // });
 
-  describe("`getSecretWord` calls", () => {
-    test("`getSecretWord` gets called on App mount", () => {
-      setup();
-      expect(mockGetSecretWord).toHaveBeenCalled();
-    });
-  });
+  describe('`getSecretWord` calls', () => {
+    test('`getSecretWord` gets called on App mount', () => {
+      setup()
+      expect(mockGetSecretWord).toHaveBeenCalled()
+    })
+  })
 
   // test("secretWord does not update on App update", () => {
   //   const wrapper = setup();
@@ -56,13 +58,13 @@ describe("App component", () => {
   //   expect(mockGetSecretWord).not.toHaveBeenCalled();
   // });
 
-  describe("secretWord is not null", () => {
-    let wrapper;
+  describe('secretWord is not null', () => {
+    let wrapper
 
     beforeEach(() => {
-      wrapper = setup("party");
-      wrapper.update();
-    });
+      wrapper = setup('party')
+      wrapper.update()
+    })
 
     // test("renders app", () => {
     //   const appComponent = findByTestAttr(wrapper, "component-app");
@@ -73,24 +75,24 @@ describe("App component", () => {
     //   const spinnerComponent = findByTestAttr(wrapper, "component-spinner");
     //   expect(spinnerComponent.exists()).toBe(false);
     // });
-  });
+  })
 
-  describe("secretWord is null", () => {
-    let wrapper;
+  describe('secretWord is null', () => {
+    let wrapper
 
     beforeEach(() => {
-      wrapper = setup(null);
-    });
+      wrapper = setup(null)
+    })
 
-    test("does not render app", () => {
-      const appComponent = findByTestAttr(wrapper, "component-app");
+    test('does not render app', () => {
+      const appComponent = findByTestAttr(wrapper, 'component-app')
       // console.log(wrapper.debug());
-      expect(appComponent.exists()).toBe(false);
-    });
+      expect(appComponent.exists()).toBe(false)
+    })
 
-    test("renders spinner", () => {
-      const spinnerComponent = findByTestAttr(wrapper, "component-spinner");
-      expect(spinnerComponent.exists()).toBe(true);
-    });
-  });
-});
+    test('renders spinner', () => {
+      const spinnerComponent = findByTestAttr(wrapper, 'component-spinner')
+      expect(spinnerComponent.exists()).toBe(true)
+    })
+  })
+})

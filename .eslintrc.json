@@ -1,0 +1,66 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["import", "jest", "jest-formatting", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jest/recommended",
+    "plugin:jest-formatting/recommended",
+    "airbnb",
+    "react-app",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js"]
+      }
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jquery": false,
+    "jest": true
+  },
+  "rules": {
+    "quotes": 0,
+    "no-debugger": 1,
+    "no-var": 1,
+    "no-trailing-spaces": 0,
+    "eol-last": 0,
+    "no-underscore-dangle": 0,
+    "no-alert": 0,
+    "no-lone-blocks": 0,
+    "no-console": 0,
+    "import/extensions": 1,
+    "import/no-named-as-default": 0,
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "react/jsx-filename-extension": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/no-array-index-key": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "arrowParens": "avoid",
+        "jsxSingleQuote": true,
+        "printWidth": 85,
+        "semi": false,
+        "useTabs": false,
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "tabWidth": 2
+      }
+    ]
+  },
+  "globals": {
+    "Atomics": false,
+    "SharedArrayBuffer": false
+  }
+}

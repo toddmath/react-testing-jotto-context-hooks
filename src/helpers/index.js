@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /**
  * @method getLetterMatchCount
  * @param {string} guessedWord  - Guessed word.
@@ -6,9 +7,9 @@
  */
 export function getLetterMatchCount(guessedWord, secretWord) {
   const [guessedSet, secretSet] = [
-    new Set(guessedWord.split("")),
-    new Set(secretWord.split(""))
-  ];
+    new Set(guessedWord.split('')),
+    new Set(secretWord.split('')),
+  ]
 
-  return [...secretSet].filter(letter => guessedSet.has(letter)).length;
+  return [...secretSet].filter(letter => guessedSet.has(letter)).length
 }

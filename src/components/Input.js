@@ -1,50 +1,50 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Form, FormGroup, Label, Button, Input as In } from "reactstrap";
+import { Form, FormGroup, Label, Button, Input as In } from 'reactstrap'
 
 const Input = ({ secretWord }) => {
-  const [currentGuess, setCurrentGuess] = React.useState("");
+  const [currentGuess, setCurrentGuess] = React.useState('')
 
   // TODO: update `guessedWords` context
   // TODO: check against `secretWord` and optionally update `success` context
   const handleOnSubmit = e => {
-    if (e) e.preventDefault();
-    setCurrentGuess("");
-  };
+    if (e) e.preventDefault()
+    setCurrentGuess('')
+  }
 
   return (
-    <div data-test="component-input">
+    <div data-test='component-input'>
       <Form inline>
-        <FormGroup className="mb-2 mx-sm-3">
-          <Label for="guess" className="mr-2">
+        <FormGroup className='mb-2 mx-sm-3'>
+          <Label for='guess' className='mr-2'>
             Next Guess:
           </Label>
           <In
-            data-test="input-box"
-            type="search"
-            name="guess"
-            id="guess"
-            placeholder="five-letter guess"
+            data-test='input-box'
+            type='search'
+            name='guess'
+            id='guess'
+            placeholder='five-letter guess'
             value={currentGuess}
             onChange={e => setCurrentGuess(e.target.value)}
           />
         </FormGroup>
         <Button
-          data-test="submit-button"
+          data-test='submit-button'
           onClick={e => handleOnSubmit(e)}
-          className="mb-2"
-          color="primary"
+          className='mb-2'
+          color='primary'
         >
           Submit
         </Button>
       </Form>
     </div>
-  );
-};
+  )
+}
 
 Input.propTypes = {
-  secretWord: PropTypes.string.isRequired
-};
+  secretWord: PropTypes.string.isRequired,
+}
 
-export default Input;
+export default Input

@@ -1,57 +1,56 @@
-import React from "react";
-import { shallow } from "enzyme";
+import React from 'react'
+import { shallow } from 'enzyme'
 
-import { findByTestAttr, checkProps } from "../../test/testUtils";
-import Input from "./Input";
+import { findByTestAttr, checkProps } from '../../test/testUtils'
+import Input from './Input'
 
 /**
  * Setup function for Input component
  * @return {ShallowWrapper}
  */
-const setup = (secretWord = "party") => {
-  return shallow(<Input secretWord={secretWord} />);
-};
+const setup = (secretWord = 'party') => {
+  return shallow(<Input secretWord={secretWord} />)
+}
 
-describe("Input", () => {
-  test("renders without error", () => {
-    const wrapper = setup();
-    const input = findByTestAttr(wrapper, "component-input");
-    expect(input.length).toBe(1);
-  });
+describe('Input', () => {
+  test('renders without error', () => {
+    const wrapper = setup()
+    const input = findByTestAttr(wrapper, 'component-input')
+    expect(input).toHaveLength(1)
+  })
 
-  test("does not thro warning with expected props", () => {
-    checkProps(Input, { secretWord: "party" });
-  });
+  // eslint-disable-next-line jest/expect-expect
+  test('does not thro warning with expected props', () => {
+    checkProps(Input, { secretWord: 'party' })
+  })
 
-  describe("state control input field", () => {
-    let wrapper,
-      inputBox,
-      submitButton,
-      mockEvent;
-    const mockSetCurrentGuess = jest.fn();
-    const mockValue = "train";
+  describe('state control input field', () => {
+    // eslint-disable-next-line one-var
+    let wrapper, inputBox, submitButton, mockEvent
+    const mockSetCurrentGuess = jest.fn()
+    const mockValue = 'train'
 
     beforeEach(() => {
-      mockSetCurrentGuess.mockClear();
-      React.useState = jest.fn(() => ["", mockSetCurrentGuess]);
-      mockEvent = { target: { value: mockValue } };
+      mockSetCurrentGuess.mockClear()
+      React.useState = jest.fn(() => ['', mockSetCurrentGuess])
+      mockEvent = { target: { value: mockValue } }
 
-      wrapper = setup();
-      inputBox = findByTestAttr(wrapper, "input-box");
-      submitButton = findByTestAttr(wrapper, "submit-button");
-    });
+      wrapper = setup()
+      inputBox = findByTestAttr(wrapper, 'input-box')
+      submitButton = findByTestAttr(wrapper, 'submit-button')
+    })
 
-    test("state updates with value of input box upon change", () => {
-      inputBox.simulate("change", mockEvent);
+    test('state updates with value of input box upon change', () => {
+      inputBox.simulate('change', mockEvent)
 
-      expect(mockSetCurrentGuess).toHaveBeenCalledWith(mockValue);
-    });
+      expect(mockSetCurrentGuess).toHaveBeenCalledWith(mockValue)
+    })
 
-    test("state updates and clears upon submit", () => {
-      submitButton.simulate("click");
+    test('state updates and clears upon submit', () => {
+      submitButton.simulate('click')
 
-      expect(mockSetCurrentGuess).toHaveBeenCalled();
-      expect(mockSetCurrentGuess).toHaveBeenCalledWith("")
-    });
-  });
-});
+      expect(mockSetCurrentGuess).toHaveBeenCalled()
+      expect(mockSetCurrentGuess).toHaveBeenCalledWith('')
+    })
+  })
+})

@@ -1,25 +1,26 @@
-import moxios from 'moxios';
+import moxios from 'moxios'
 
-import { getSecretWord } from './hookActions';
+import { getSecretWord } from './hookActions'
 
 describe('moxios tests', () => {
-  beforeEach(() => moxios.install());
-  afterEach(() => moxios.uninstall());
+  beforeEach(() => moxios.install())
+
+  afterEach(() => moxios.uninstall())
 
   test('`getSecretWord` calls callback on axios response', async () => {
-    const secretWord = 'party';
+    const secretWord = 'party'
 
     moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
+      const request = moxios.requests.mostRecent()
       request.respondWith({
         status: 200,
-        response: {secretWord},
-      });
-    });
+        response: { secretWord },
+      })
+    })
 
-    const mockSetSecretWord = jest.fn();
-    await getSecretWord(mockSetSecretWord);
+    const mockSetSecretWord = jest.fn()
+    await getSecretWord(mockSetSecretWord)
 
-    expect(mockSetSecretWord).toHaveBeenCalledWith(secretWord);
-  });
-});
+    expect(mockSetSecretWord).toHaveBeenCalledWith(secretWord)
+  })
+})
