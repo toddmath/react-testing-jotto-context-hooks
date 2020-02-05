@@ -2,10 +2,10 @@
 /* eslint-disable react/forbid-foreign-prop-types */
 import React from 'react'
 import { mount } from 'enzyme'
+
 import { findByTestAttr } from '../../test/testUtils'
-import Congrats from './Congrats'
-import languageContext from '../contexts/languageContext'
-import successContext from '../contexts/successContext'
+import { Congrats } from '.'
+import { languageContext, successContext } from '../contexts'
 
 // const defaultProps = { success: false }
 

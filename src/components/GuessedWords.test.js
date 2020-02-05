@@ -3,8 +3,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { findByTestAttr } from '../../test/testUtils'
-import guessedWordsContext from '../contexts/guessedWordsContext'
-import GuessedWords from './GuessedWords'
+import { guessedWordsContext } from '../contexts'
+import { GuessedWords } from '.'
 
 /**
  * Factory function to create a ShallowWrapper for the Congrats component.

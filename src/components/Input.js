@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'reactstrap'
 
-import successContext from '../contexts/successContext'
-import languageContext from '../contexts/languageContext'
+import { successContext, languageContext } from '../contexts'
 import str from '../helpers/strings'
 
 const Input = ({ secretWord }) => {
@@ -12,7 +11,6 @@ const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState('')
 
   const inputPlaceHolder = str.getStringByLanguage(language, 'guessInputPlaceholder')
-
   const buttonText = str.getStringByLanguage(language, 'submit')
 
   // TODO: update `guessedWords` context
@@ -24,8 +22,12 @@ const Input = ({ secretWord }) => {
     setCurrentGuess('')
   }
 
-  if (success) return null
+  const handleChange = e => {
+    if (e) e.preventDefault()
+    setCurrentGuess(e.target.value)
+  }
 
+  if (success) return null
   return (
     <div data-test='component-input'>
       <Form inline>
@@ -38,19 +40,23 @@ const Input = ({ secretWord }) => {
             className='form-control'
             placeholder={inputPlaceHolder}
             value={currentGuess}
-            onChange={e => setCurrentGuess(e.target.value)}
+            onChange={handleChange}
             aria-label='Username'
+            aria-describedby='submit-button'
           />
+          <div className='input-group-prepend'>
+            <button
+              data-test='submit-button'
+              id='submit-button'
+              onClick={e => handleOnSubmit(e)}
+              className={`btn btn-primary ${language === 'emoji' ? 'px-4' : ''}`}
+              type='button'
+              color='primary'
+            >
+              {buttonText}
+            </button>
+          </div>
         </div>
-        <button
-          data-test='submit-button'
-          onClick={e => handleOnSubmit(e)}
-          className={`mb-2 btn btn-primary ${language === 'emoji' ? 'px-4' : ''}`}
-          type='button'
-          color='primary'
-        >
-          {buttonText}
-        </button>
       </Form>
     </div>
   )

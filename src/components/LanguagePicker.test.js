@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 
 import { findByTestAttr, checkProps } from '../../test/testUtils'
 
-import LanguagePicker from './LanguagePicker'
+import { LanguagePicker } from '.'
 
 const mockSetLanguage = jest.fn()
 

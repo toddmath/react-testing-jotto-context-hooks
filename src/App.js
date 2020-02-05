@@ -2,9 +2,7 @@
 import React, { useEffect, useReducer } from 'react'
 import { Container, Alert, Spinner } from 'reactstrap'
 
-import guessedWordsContext from './contexts/guessedWordsContext'
-import successContext from './contexts/successContext'
-import languageContext from './contexts/languageContext'
+import { guessedWordsContext, languageContext, successContext } from './contexts'
 import hookActions from './actions/hookActions'
 import { Input, LanguagePicker, Congrats, GuessedWords } from './components'
 // import FulfillingSquareSpinner from "@bit/bondz.react-epic-spinners.fulfilling-square-spinner";

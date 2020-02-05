@@ -1,18 +1,17 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import successContext from '../contexts/successContext'
-import LanguageContext from '../contexts/languageContext'
+import { languageContext, successContext } from '../contexts'
 import { findByTestAttr, checkProps } from '../../test/testUtils'
-import Input from './Input'
+import { Input } from '.'
 
 const mountSetup = ({ language, secretWord, success }) => {
   return mount(
-    <LanguageContext.Provider value={language || 'en'}>
+    <languageContext.Provider value={language || 'en'}>
       <successContext.SuccessProvider value={[success || false, jest.fn()]}>
         <Input secretWord={secretWord || 'party'} />
       </successContext.SuccessProvider>
-    </LanguageContext.Provider>
+    </languageContext.Provider>
   )
 }
 

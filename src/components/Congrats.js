@@ -1,7 +1,6 @@
 import React from 'react'
 
-import successContext from '../contexts/successContext'
-import languageContext from '../contexts/languageContext'
+import { languageContext, successContext } from '../contexts'
 import str from '../helpers/strings'
 
 const Congrats = () => {
@@ -11,13 +10,13 @@ const Congrats = () => {
   return (
     <div data-test='component-congrats'>
       {success === true && (
-        <span
+        <div
           data-test='congrats-message'
-          className='alert alert-success'
+          className='alert alert-success fade show'
           role='alert'
         >
           {str.getStringByLanguage(language, 'congrats')}
-        </span>
+        </div>
       )}
     </div>
   )

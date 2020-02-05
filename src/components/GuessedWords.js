@@ -1,8 +1,7 @@
 import React from 'react'
 import { Table } from 'reactstrap'
 
-import guessedWordsContext from '../contexts/guessedWordsContext'
-import languageContext from '../contexts/languageContext'
+import { guessedWordsContext, languageContext } from '../contexts'
 import str from '../helpers/strings'
 
 const GuessedWords = () => {
@@ -19,6 +18,7 @@ const GuessedWords = () => {
         <div data-test='guessed-words'>
           <h3>{str.getStringByLanguage(language, 'guessedWords')}</h3>
           <Table striped size='sm' responsive>
+            <caption>List of guessed words</caption>
             <thead className='thead-dark'>
               <tr>
                 <th>#</th>
