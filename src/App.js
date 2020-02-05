@@ -37,9 +37,11 @@ const App = () => {
     hookActions.getSecretWord(setSecretWord)
   }, [])
 
+  const { secretWord, language } = state
+
   return (
     <div>
-      {!state.secretWord ? (
+      {!secretWord ? (
         <div data-test='component-spinner'>
           <Container
             className='themed-container min-vh-100 min-vw-100 d-flex flex-column justify-content-center align-items-center'
@@ -64,16 +66,16 @@ const App = () => {
         <div data-test='component-app'>
           <Container>
             <h1 className='display-3'>Jotto</h1>
-            <languageContext.Provider value={state.language}>
-              <LanguagePicker setLanguage={setLanguage} />
-              <guessedWordsContext.GuessedWordsProvider>
+            <guessedWordsContext.GuessedWordsProvider>
+              <languageContext.Provider value={language}>
+                <LanguagePicker setLanguage={setLanguage} />
                 <successContext.SuccessProvider>
                   <Congrats />
-                  <Input secretWord={state.secretWord} />
+                  <Input secretWord={secretWord} />
                 </successContext.SuccessProvider>
                 <GuessedWords />
-              </guessedWordsContext.GuessedWordsProvider>
-            </languageContext.Provider>
+              </languageContext.Provider>
+            </guessedWordsContext.GuessedWordsProvider>
           </Container>
         </div>
       )}

@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
+import successContext from '../contexts/successContext'
 import LanguageContext from '../contexts/languageContext'
 import { findByTestAttr, checkProps } from '../../test/testUtils'
 import Input from './Input'
@@ -13,10 +14,12 @@ const setup = (secretWord = 'party') => {
   return shallow(<Input secretWord={secretWord} />)
 }
 
-const mountSetup = ({ language, secretWord }) => {
+const mountSetup = ({ language, secretWord, success }) => {
   return mount(
     <LanguageContext.Provider value={language || 'en'}>
-      <Input secretWord={secretWord || 'party'} />
+      <successContext.SuccessProvider value={[success || false, jest.fn()]}>
+        <Input secretWord={secretWord || 'party'} />
+      </successContext.SuccessProvider>
     </LanguageContext.Provider>
   )
 }
@@ -38,13 +41,13 @@ describe('LanguageContext', () => {
 
 describe('Input', () => {
   test('renders without error', () => {
-    const wrapper = setup()
+    const wrapper = mountSetup({})
     const input = findByTestAttr(wrapper, 'component-input')
     expect(input).toHaveLength(1)
   })
 
   // eslint-disable-next-line jest/expect-expect
-  test('does not thro warning with expected props', () => {
+  test('does not thror warning with expected props', () => {
     checkProps(Input, { secretWord: 'party' })
   })
 
@@ -59,7 +62,7 @@ describe('Input', () => {
       React.useState = jest.fn(() => ['', mockSetCurrentGuess])
       mockEvent = { target: { value: mockValue } }
 
-      wrapper = setup()
+      wrapper = mountSetup({})
       submitButton = findByTestAttr(wrapper, 'submit-button')
     })
 
@@ -76,5 +79,10 @@ describe('Input', () => {
       expect(mockSetCurrentGuess).toHaveBeenCalled()
       expect(mockSetCurrentGuess).toHaveBeenCalledWith('')
     })
+  })
+
+  test('input component does not show when success is true', () => {
+    const wrapper = mountSetup({ secretWord: 'party', success: true })
+    expect(wrapper.isEmptyRender()).toBe(true)
   })
 })

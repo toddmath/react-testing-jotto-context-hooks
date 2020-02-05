@@ -2,19 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, FormGroup, Input as In } from 'reactstrap'
 
+import successContext from '../contexts/successContext'
 import languageContext from '../contexts/languageContext'
-import stringsModule from '../helpers/strings'
+import str from '../helpers/strings'
 
 const Input = ({ secretWord }) => {
   const language = React.useContext(languageContext)
+  const [success, setSuccess] = successContext.useSuccess()
   const [currentGuess, setCurrentGuess] = React.useState('')
 
-  const inputPlaceHolder = stringsModule.getStringByLanguage(
-    language,
-    'guessInputPlaceholder'
-  )
+  const inputPlaceHolder = str.getStringByLanguage(language, 'guessInputPlaceholder')
 
-  const buttonText = stringsModule.getStringByLanguage(language, 'submit')
+  const buttonText = str.getStringByLanguage(language, 'submit')
 
   // TODO: update `guessedWords` context
   // TODO: check against `secretWord` and optionally update `success` context
@@ -23,20 +22,24 @@ const Input = ({ secretWord }) => {
     setCurrentGuess('')
   }
 
+  if (success) return null
+
   return (
     <div data-test='component-input'>
       <Form inline>
-        <FormGroup className='mb-2 mx-sm-3'>
-          <In
+        <div className='input-group flex-nowrap mb-2 mx-sm-3'>
+          <input
             data-test='input-box'
-            type='search'
             name='guess'
             id='guess'
+            type='text'
+            className='form-control'
             placeholder={inputPlaceHolder}
             value={currentGuess}
             onChange={e => setCurrentGuess(e.target.value)}
+            aria-label='Username'
           />
-        </FormGroup>
+        </div>
         <button
           data-test='submit-button'
           onClick={e => handleOnSubmit(e)}
