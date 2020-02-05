@@ -22,4 +22,24 @@ const checkProps = (component, conformingProps) => {
   expect(propError).toBeUndefined()
 }
 
-export { findByTestAttr, checkProps }
+/**
+ * Helper function to attach an onChange event listener and mock value for tests
+ * @param {HTMLElement} elem Element to attach event listener onto
+ * @param {string} value mock value to simulate the event with
+ */
+function handleChange(elem, value) {
+  elem.simulate('change', { target: { value } })
+}
+
+/**
+ * Helper function to create a mock `jest.fn` with attached `returnMockValue`.
+ * @param {*} returnVal Value('s) to inject into `mockReturnValue` method.
+ * @param {Function} [mockFunc=null] Function to inject into mock `jest.fn`.
+ * @param {string} [name=null] Optional name to give to mock function.
+ */
+function createMockReturn(returnVal, mockFunc = null, name = null) {
+  const output = jest.fn(mockFunc).mockReturnValue(returnVal)
+  return name ? output.mockName(String(name)) : output
+}
+
+export { findByTestAttr, checkProps, handleChange, createMockReturn }

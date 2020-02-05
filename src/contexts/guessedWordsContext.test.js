@@ -1,10 +1,11 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import guessedWordsContext from './guessedWordsContext'
+import { guessedWordsContext } from '.'
 
 /**
  * a functional component that calls useGuessedWords for our tests
+ * @returns {JSX.Element}
  */
 const FunctionalComponent = () => {
   guessedWordsContext.useGuessedWords()

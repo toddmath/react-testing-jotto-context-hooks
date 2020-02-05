@@ -1,10 +1,11 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 
-import successContext from './successContext'
+import { successContext } from '.'
 
 /**
  * a functional component that calls useSuccess for our tests
+ * @returns {JSX.Element}
  */
 const FunctionalComponent = () => {
   successContext.useSuccess()

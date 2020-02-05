@@ -21,7 +21,14 @@ const languageStrings = {
 
 const hasKey = (lang, key, dic) => dic[lang] && dic[lang][key]
 
-const getStringByLanguage = (language, key, dict = languageStrings) => {
+/**
+ * Helper function to get string for either english or emoji at provided key.
+ * @param {string} language Which language to return.
+ * @param {string} key Which language key to return.
+ * @param {object} [dict=languageStrings] Optional paramater, for testing.
+ * @returns {string} translated string
+ */
+function getStringByLanguage(language, key, dict = languageStrings) {
   if (!hasKey(language, key, dict)) {
     console.warn(`Could not get string [${key}] for [${language}]`)
     return dict.en[key]

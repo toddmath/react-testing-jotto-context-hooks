@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { findByTestAttr } from '../test/testUtils'
+import { findByTestAttr, handleChange } from '../test/testUtils'
 import { guessedWordsContext, successContext } from './contexts'
 import { Input, GuessedWords } from './components'
 
@@ -20,12 +20,10 @@ function setup(guessedWords = [], secretWord = 'party') {
 
   // prepopulate guessedWords context by simulating word guess
   if (guessedWords.length > 0) {
-    // eslint-disable-next-line prettier/prettier
-    [...guessedWords].forEach(word => {
-      const mockEvent = { target: { value: word } }
-      inputBox.simulate('change', mockEvent)
+    for (const word of guessedWords) {
+      handleChange(inputBox, word)
       submitButton.simulate('click')
-    })
+    }
   }
 
   return [wrapper, inputBox, submitButton]
@@ -35,13 +33,14 @@ describe('test word guesses', () => {
   let wrapper, inputBox, submitButton // eslint-disable-line one-var
 
   beforeEach(() => {
-    ;[wrapper, inputBox, submitButton] = setup('party') // eslint-disable-line prettier/prettier
+    [wrapper, inputBox, submitButton] = setup('party') // eslint-disable-line prettier/prettier
   })
+
+  afterEach(() => wrapper.update())
 
   describe('correct guess', () => {
     beforeEach(() => {
-      const mockEvent = { target: { value: 'party' } }
-      inputBox.simulate('change', mockEvent)
+      handleChange(inputBox, 'party')
       submitButton.simulate('click')
     })
 
@@ -53,8 +52,7 @@ describe('test word guesses', () => {
 
   describe('incorrect guess', () => {
     beforeEach(() => {
-      const mockEvent = { target: { value: 'train' } }
-      inputBox.simulate('change', mockEvent)
+      handleChange(inputBox, 'train')
       submitButton.simulate('click')
     })
 

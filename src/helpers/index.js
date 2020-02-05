@@ -1,15 +1,19 @@
 /* eslint-disable import/prefer-default-export */
+
+const toSet = array => new Set(array.split(''))
+
 /**
- * @method getLetterMatchCount
+ * Helper function to count how many characters match between guessed and secret words
  * @param {string} guessedWord  - Guessed word.
  * @param {string} secretWord - Secret word.
  * @returns {number} - Number of letters matched between guessed word and secret word.
  */
 export function getLetterMatchCount(guessedWord, secretWord) {
-  const [guessedSet, secretSet] = [
-    new Set(guessedWord.split('')),
-    new Set(secretWord.split('')),
-  ]
+  if (!guessedWord || !secretWord) {
+    throw Error(`guessedWord and secretWord cannot be undefined`)
+  }
 
-  return [...secretSet].filter(letter => guessedSet.has(letter)).length
+  const [guessedSet, secretSet] = [toSet(guessedWord), toSet(secretWord)]
+
+  return [...secretSet].filter(char => guessedSet.has(char)).length
 }

@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { findByTestAttr } from '../../test/testUtils'
+import { findByTestAttr, createMockReturn } from '../../test/testUtils'
 import { guessedWordsContext } from '../contexts'
 import { GuessedWords } from '.'
 
@@ -12,9 +12,8 @@ import { GuessedWords } from '.'
  * @param {Array} guessedWords - guessedWords specific to this setup.
  * @returns {ShallowWrapper}
  */
-const setup = (guessedWords = []) => {
-  const mockUseGuessedWords = jest.fn().mockReturnValue([guessedWords, jest.fn()])
-  guessedWordsContext.useGuessedWords = mockUseGuessedWords
+function setup(guessedWords = []) {
+  guessedWordsContext.useGuessedWords = createMockReturn([guessedWords, jest.fn()])
   return shallow(<GuessedWords />)
 }
 
@@ -82,8 +81,7 @@ describe('GuessedWords', () => {
     })
 
     test('correctly renders guess instructions string in emoji', () => {
-      const mockUseContext = jest.fn().mockReturnValue('emoji')
-      React.useContext = mockUseContext
+      React.useContext = createMockReturn('emoji')
       const wrapper = setup([])
       const guessInstructions = findByTestAttr(wrapper, 'guess-instructions')
       expect(guessInstructions.text()).toBe('🤔🤫🔤')

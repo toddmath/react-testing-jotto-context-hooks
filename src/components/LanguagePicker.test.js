@@ -2,14 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { findByTestAttr, checkProps } from '../../test/testUtils'
-
 import { LanguagePicker } from '.'
 
 const mockSetLanguage = jest.fn()
 
-const setup = () => {
-  return shallow(<LanguagePicker setLanguage={mockSetLanguage} />)
-}
+const setup = () => shallow(<LanguagePicker setLanguage={mockSetLanguage} />)
 
 describe('LanguagePicker Component', () => {
   test('renders without error', () => {
@@ -19,7 +16,7 @@ describe('LanguagePicker Component', () => {
   })
 
   // eslint-disable-next-line jest/expect-expect
-  test('doesn not throw warning with expected props', () => {
+  test(`doesn't not throw warning with expected props`, () => {
     checkProps(LanguagePicker, { setLanguage: jest.fn() })
   })
 

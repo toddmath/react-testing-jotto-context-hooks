@@ -3,7 +3,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import { findByTestAttr } from '../test/testUtils'
+import { findByTestAttr, createMockReturn } from '../test/testUtils'
 import hookActions from './actions/hookActions'
 import App from './App'
 
@@ -12,25 +12,17 @@ const mockGetSecretWord = jest.fn()
 /**
  * Setup function for App component
  * @param {string} secretWord desired secretWord state value for test.
- * @returns {ReactWrapper}
+ * @returns {ReactWrapper} returns `mount` becuase useEffect not called with `shallow`
+ * @see https://github.com/airbnb/enzyme/issues/2086
  */
-const setup = secretWord => {
+function setup(secretWord) {
   mockGetSecretWord.mockClear()
   hookActions.getSecretWord = mockGetSecretWord
+  const mockReturn = [{ secretWord, language: 'en' }, jest.fn()]
+  React.useReducer = createMockReturn(mockReturn)
 
-  const mockUseReducer = jest
-    .fn()
-    .mockReturnValue([{ secretWord, language: 'en' }, jest.fn()])
-  React.useReducer = mockUseReducer
-
-  // using mount becuase useEffect not called with `shallow`
-  // see https://github.com/airbnb/enzyme/issues/2086
   return mount(<App />)
 }
-
-// const shallowSetup = () => {
-//   return shallow(<App />);
-// };
 
 describe('App component', () => {
   // test("App renders without error", () => {
@@ -46,6 +38,7 @@ describe('App component', () => {
     test('`getSecretWord` gets called on App mount', () => {
       setup()
       expect(mockGetSecretWord).toHaveBeenCalled()
+      expect(mockGetSecretWord.mock.calls).toHaveLength(1)
     })
   })
 
@@ -54,7 +47,10 @@ describe('App component', () => {
   //   console.log(wrapper.debug());
   //   mockGetSecretWord.mockClear();
 
-  //  // ! issue with update() see: https://github.com/airbnb/enzyme/issues/2254
+  /**
+   * issue with update() see:
+   * @see {@link https://github.com/airbnb/enzyme/issues/2254}
+   */
   //   wrapper.setProps();
 
   //   expect(mockGetSecretWord).not.toHaveBeenCalled();
@@ -65,8 +61,9 @@ describe('App component', () => {
 
     beforeEach(() => {
       wrapper = setup('party')
-      wrapper.update()
     })
+
+    afterEach(() => wrapper.update())
 
     // test("renders app", () => {
     //   const appComponent = findByTestAttr(wrapper, "component-app");
@@ -88,7 +85,6 @@ describe('App component', () => {
 
     test('does not render app', () => {
       const appComponent = findByTestAttr(wrapper, 'component-app')
-      // console.log(wrapper.debug());
       expect(appComponent.exists()).toBe(false)
     })
 
