@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Form, FormGroup, Input as In } from 'reactstrap'
+import { Form } from 'reactstrap'
 
 import successContext from '../contexts/successContext'
 import languageContext from '../contexts/languageContext'
@@ -16,9 +16,11 @@ const Input = ({ secretWord }) => {
   const buttonText = str.getStringByLanguage(language, 'submit')
 
   // TODO: update `guessedWords` context
-  // TODO: check against `secretWord` and optionally update `success` context
   const handleOnSubmit = e => {
     if (e) e.preventDefault()
+    if (currentGuess === secretWord) {
+      setSuccess(true)
+    }
     setCurrentGuess('')
   }
 

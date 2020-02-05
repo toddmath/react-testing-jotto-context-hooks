@@ -1,18 +1,10 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 
 import successContext from '../contexts/successContext'
 import LanguageContext from '../contexts/languageContext'
 import { findByTestAttr, checkProps } from '../../test/testUtils'
 import Input from './Input'
-
-/**
- * Setup function for Input component
- * @return {ShallowWrapper}
- */
-const setup = (secretWord = 'party') => {
-  return shallow(<Input secretWord={secretWord} />)
-}
 
 const mountSetup = ({ language, secretWord, success }) => {
   return mount(
