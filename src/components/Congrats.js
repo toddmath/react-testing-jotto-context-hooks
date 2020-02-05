@@ -1,28 +1,26 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Alert } from 'reactstrap'
 
+import successContext from '../contexts/successContext'
 import languageContext from '../contexts/languageContext'
-import stringsModule from '../helpers/strings'
+import str from '../helpers/strings'
 
-const Congrats = ({ success }) => {
+const Congrats = () => {
   const language = React.useContext(languageContext)
+  const [success] = successContext.useSuccess()
 
   return (
     <div data-test='component-congrats'>
       {success === true && (
-        <Alert color='success'>
-          <span data-test='congrats-message'>
-            {stringsModule.getStringByLanguage(language, 'congrats')}
-          </span>
-        </Alert>
+        <span
+          data-test='congrats-message'
+          className='alert alert-success'
+          role='alert'
+        >
+          {str.getStringByLanguage(language, 'congrats')}
+        </span>
       )}
     </div>
   )
-}
-
-Congrats.propTypes = {
-  success: PropTypes.bool.isRequired,
 }
 
 export default Congrats

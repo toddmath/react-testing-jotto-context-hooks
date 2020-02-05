@@ -2,9 +2,11 @@
 import React, { useEffect, useReducer } from 'react'
 import { Container, Alert, Spinner } from 'reactstrap'
 
+import guessedWordsContext from './contexts/guessedWordsContext'
+import successContext from './contexts/successContext'
 import languageContext from './contexts/languageContext'
 import hookActions from './actions/hookActions'
-import { Input, LanguagePicker } from './components'
+import { Input, LanguagePicker, Congrats, GuessedWords } from './components'
 // import FulfillingSquareSpinner from "@bit/bondz.react-epic-spinners.fulfilling-square-spinner";
 import './App.css'
 
@@ -64,7 +66,13 @@ const App = () => {
             <h1 className='display-3'>Jotto</h1>
             <languageContext.Provider value={state.language}>
               <LanguagePicker setLanguage={setLanguage} />
-              <Input secretWord={state.secretWord} />
+              <guessedWordsContext.GuessedWordsProvider>
+                <successContext.SuccessProvider>
+                  <Congrats />
+                  <Input secretWord={state.secretWord} />
+                </successContext.SuccessProvider>
+                <GuessedWords />
+              </guessedWordsContext.GuessedWordsProvider>
             </languageContext.Provider>
           </Container>
         </div>
